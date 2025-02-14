@@ -19,20 +19,56 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    var adapter : PeliculaAdapter? = null
+    var peliculasAdapter : PeliculaAdapter? = null
     var peliculas = ArrayList<Pelicula>()
 
+    var seriesAdapter : PeliculaAdapter? = null
+    var series = ArrayList<Pelicula> ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        var gridview : GridView = findViewById(R.id.gridview) as GridView
+        val gridviewPeliculas : GridView = findViewById(R.id.gridview_movies) as GridView
+        val gridviewSeries : GridView = findViewById(R.id.gridview_series) as GridView
 
         cargarPeliculas()
-        adapter = PeliculaAdapter(this, peliculas)
-        gridview.adapter = adapter
+        cargarSeries()
+
+        seriesAdapter = PeliculaAdapter(this, series)
+        peliculasAdapter = PeliculaAdapter(this, peliculas)
+
+        gridviewSeries.adapter = seriesAdapter
+        gridviewPeliculas.adapter = peliculasAdapter
+    }
+
+    fun cargarSeries() {
+        series.add(Pelicula("Dr. House", R.drawable.drhouse, R.drawable.househeader, "The series follows the life of anti-social, pain killer addict, witty and arrogant medical doctor Gregory\n" +
+                "House (Hugh Laurie) with only half a muscle in his right leg. He and his team of medical doctors try\n" +
+                "to cure complex and rare diseases from very ill ordinary people in the United States of America."))
+        series.add(Pelicula("Smallville", R.drawable.smallville,R.drawable.smallvilleheader, "The numerous miraculous rescues by the local wonder boy Clark have aroused suspicions amongst\n" +
+                "colonials of Smallville. Interestingly, the boy has managed to downplay his acts of various heroic\n" +
+                "egresses in the past. They say he's either too fast or has a penchant for finding trouble. He was\n" +
+                "found by Martha and Jonathan Kent on the day of the Meteor Shower, and subsequently adopted.\n" +
+                "Clark&#39;s friend Lex Luthor, the only heir of Luthorcorp, has been secretly investigating grounds for\n" +
+                "Clark';s outlandish valor. However, on the face of it, Clark just seems a normal boy who's slightly\n" +
+                "more secretive than usual."))
+        series.add(Pelicula("Dr. Who", R.drawable.drwho, R.drawable.drwhoheader, "Traveling across time and space, the immortal time-lord known as &#39;The Doctor&#39; travels across the\n" +
+                "universe with his many companions and his loyal shape-shifting space-ship: The TARDIS. The\n" +
+                "Doctor faces many threats across many generations: from The Daleks, The Cybermen and his time-\n" +
+                "lord adversary The Master to the sinister Davros, creator of The Daleks."))
+        series.add(Pelicula("Suits", R.drawable.suits, R.drawable.suitsheader, "While running from a drug deal gone bad, brilliant young college dropout Mike Ross slips into a job\n" +
+                "interview with one of New York City's best legal closers, Harvey Specter. Tired of cookie-cutter law-\n" +
+                "school grads, Harvey takes a gamble by hiring Mike on the spot after recognizing his raw talent and\n" +
+                "photographic memory. Mike and Harvey are a winning team. Although Mike is a genius, he still has\n" +
+                "a lot to learn about law; and while Harvey might seem like an emotionless, cold-blooded shark,\n" +
+                "Mike's sympathy and concern for their cases and clients will help remind Harvey why he went into\n" +
+                "law in the first place. Mike&#39;s other allies in the office include the firm&#39;s best paralegal Rachel and\n" +
+                "Harvey's no-nonsense assistant Donna. Proving to be an irrepressible duo and invaluable to the\n" +
+                "practice, Mike and Harvey must keep their secret from everyone including managing partner\n" +
+                "Jessica and Harvey&#39;s archnemesis Louis, who seems intent on making Mike&#39;s life as difficult as\n" +
+                "possible."))
     }
 
     fun cargarPeliculas() {
