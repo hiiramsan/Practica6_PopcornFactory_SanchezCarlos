@@ -52,7 +52,7 @@ class ConfirmPurchase : AppCompatActivity() {
             intent.putExtra("movieName", movieName)
             intent.putExtra("posMovie", posMovie)
             intent.putExtra("nombreCliente", cliente.nombre)
-            intent.putExtra("tipoPage", cliente.tipoPago)
+            intent.putExtra("tipoPago", cliente.tipoPago)
             intent.putExtra("asientoId", cliente.asiento)
 
             this.startActivity(intent)

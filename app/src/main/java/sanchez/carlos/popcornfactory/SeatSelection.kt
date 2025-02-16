@@ -53,7 +53,7 @@ class SeatSelection : AppCompatActivity() {
 
             val intent = Intent(this, ConfirmPurchase::class.java)
 
-            intent.putExtra("movie", title.text.toString())
+            intent.putExtra("movieName", title.text.toString())
             intent.putExtra("seatId", selectedSeatId)
             intent.putExtra("posMovie", posMovie)
 

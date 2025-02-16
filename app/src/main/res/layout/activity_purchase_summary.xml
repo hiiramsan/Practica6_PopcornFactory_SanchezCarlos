@@ -57,7 +57,14 @@
         android:text="Enjoy the movie!"
         android:layout_marginTop="100dp"
         android:textAlignment="center"
-        
         />
 
+    <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/yellow"
+        android:textColor="#333333"
+        android:layout_marginTop="50dp"
+        android:text="Go home"/>
 </LinearLayout>
