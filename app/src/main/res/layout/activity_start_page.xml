@@ -31,7 +31,7 @@
             android:text="Welcome to Popcorn Factory, home of the best series and movies. Just lay down, make some popcorn and enjoy!"
             android:textSize="18dp"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="#ffffff"
             />
 
         <Button

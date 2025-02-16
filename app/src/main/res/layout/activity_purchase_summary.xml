@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:padding="70dp"
+    tools:context=".PurchaseSummary">
+
+    <TextView
+        android:id="@+id/tvSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:text="Order summary"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/clientName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Client: "
+        android:layout_marginTop="50dp"
+        />
+
+    <TextView
+        android:id="@+id/movieName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Movie: "
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/seat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seat: "
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/paymentMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payment Method: "
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enjoy the movie!"
+        android:layout_marginTop="100dp"
+        android:textAlignment="center"
+        
+        />
+
+</LinearLayout>
