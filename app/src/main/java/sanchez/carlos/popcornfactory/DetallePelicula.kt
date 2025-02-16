@@ -28,6 +28,7 @@ class DetallePelicula : AppCompatActivity() {
         var ns = 0
         var id = -1
         var title = ""
+        var clientes : ArrayList<Cliente> = ArrayList()
         if(bundle != null) {
             ns = bundle.getInt("numberSeats")
             title = bundle.getString("titulo")!!
@@ -36,6 +37,7 @@ class DetallePelicula : AppCompatActivity() {
             tv_pelicula_desc.setText(bundle.getString("sinopsis"))
             seatsLeft.text ="$ns seats available"
             id = bundle.getInt("pos")
+            clientes = bundle.getSerializable("clientes") as? ArrayList<Cliente> ?: ArrayList()
         }
 
         if(ns == 0) {
@@ -46,6 +48,7 @@ class DetallePelicula : AppCompatActivity() {
 
                 intent.putExtra("movie", id)
                 intent.putExtra("name", title)
+                intent.putExtra("clientes", clientes)
 
                 this.startActivity(intent)
             }

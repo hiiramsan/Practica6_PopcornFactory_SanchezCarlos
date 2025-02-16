@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("sinopsis", pelicula.sinopsis)
                 intent.putExtra("numberSeats", seatsAvailable)
                 intent.putExtra("pos", p0)
+                intent.putExtra("clientes", peliculas[p0].seats)
                 context!!.startActivity(intent)
 
             }

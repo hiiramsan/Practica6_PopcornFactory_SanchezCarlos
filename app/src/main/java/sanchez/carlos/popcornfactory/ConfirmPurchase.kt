@@ -26,6 +26,7 @@ class ConfirmPurchase : AppCompatActivity() {
         val movieName = intent.getStringExtra("movieName")
         val seatId = intent.getIntExtra("seatId", -1)
         val posMovie = intent.getIntExtra("posMovie", -1)
+        val clientes = intent.getSerializableExtra("clientes") as ArrayList<Cliente>
 
         tvMovieTitle.text = "Movie: $movieName"
 
@@ -46,7 +47,7 @@ class ConfirmPurchase : AppCompatActivity() {
             }
 
             val cliente = Cliente(name, paymentType, seatId)
-
+            clientes.add(cliente)
             val intent = Intent(this, PurchaseSummary::class.java)
 
             intent.putExtra("movieName", movieName)
