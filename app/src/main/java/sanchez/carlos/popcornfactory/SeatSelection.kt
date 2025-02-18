@@ -47,7 +47,7 @@ class SeatSelection : AppCompatActivity() {
         )
 
         disableTakenSeats(clientes)
-        enforceSingleSelection()
+        unicaSeleccion()
 
         confirm.setOnClickListener {
             // logica para reservar el asiento seleccionado
@@ -98,7 +98,7 @@ class SeatSelection : AppCompatActivity() {
         }
     }
 
-    fun enforceSingleSelection() {
+    fun unicaSeleccion() {
         rows.forEach { row ->
             row.setOnCheckedChangeListener { selectedRow, checkedId ->
                 if (checkedId != -1) {
