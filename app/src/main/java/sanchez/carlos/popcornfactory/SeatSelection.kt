@@ -21,7 +21,7 @@ class SeatSelection : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_seat_selection)
 
-        val title : TextView = findViewById(R.id.titleSeats)
+        val title: TextView = findViewById(R.id.titleSeats)
         var posMovie = -1
         var movieName = ""
         var clientes = ArrayList<Cliente>()
@@ -29,13 +29,15 @@ class SeatSelection : AppCompatActivity() {
 
         val bundle = intent.extras
 
-        if(bundle != null) {
+        if (bundle != null) {
             movieName = bundle.getString("name", "")
             posMovie = bundle.getInt("id")
             clientes = bundle.getSerializable("clientes") as ArrayList<Cliente>
         }
 
-        val confirm : Button = findViewById(R.id.confirm_button)
+        title.text = movieName
+
+        val confirm: Button = findViewById(R.id.confirm_button)
 
         rows = listOf(
             findViewById(R.id.row1),
@@ -45,10 +47,13 @@ class SeatSelection : AppCompatActivity() {
         )
 
         disableTakenSeats(clientes)
+        enforceSingleSelection()
 
-        confirm.setOnClickListener{
-           // logica para reservar el asiento seleccionado
-            val selectedSeat = getSelectedSeat()
+        confirm.setOnClickListener {
+            // logica para reservar el asiento seleccionado
+            val selectedSeat = getSelectedSeat() + 1
+
+            Toast.makeText(this, "Seat selected: $selectedSeat", Toast.LENGTH_LONG).show()
 
             if (selectedSeat == -1) {
                 Toast.makeText(this, "Please select a seat!", Toast.LENGTH_LONG).show()
@@ -58,7 +63,7 @@ class SeatSelection : AppCompatActivity() {
             val intent = Intent(this, ConfirmPurchase::class.java)
 
             intent.putExtra("movieName", movieName)
-            intent.putExtra("seatId", selectedSeat)
+            intent.putExtra("seat", selectedSeat)
             intent.putExtra("posMovie", posMovie)
             intent.putExtra("clientes", clientes)
 
@@ -73,12 +78,14 @@ class SeatSelection : AppCompatActivity() {
     fun getSelectedSeat(): Int {
         rows.forEachIndexed { rowIndex, row ->
             val checked = row.checkedRadioButtonId
-            if (checked != -1) return (rowIndex * row.childCount) + row.indexOfChild(findViewById(checked))
+            if (checked != -1) {
+                return (rowIndex * row.childCount) + row.indexOfChild(findViewById(checked))
+            }
         }
         return -1
     }
 
-     fun disableTakenSeats(clientes: ArrayList<Cliente>) {
+    fun disableTakenSeats(clientes: ArrayList<Cliente>) {
         clientes.forEach { cliente ->
             val seatIndex = cliente.asiento
             val rowIndex = seatIndex / rows[0].childCount
@@ -87,6 +94,20 @@ class SeatSelection : AppCompatActivity() {
             if (rowIndex in rows.indices) {
                 val seat = rows[rowIndex].getChildAt(colIndex) as? RadioButton
                 seat?.isEnabled = false
+            }
+        }
+    }
+
+    fun enforceSingleSelection() {
+        rows.forEach { row ->
+            row.setOnCheckedChangeListener { selectedRow, checkedId ->
+                if (checkedId != -1) {
+                    rows.forEach { otherRow ->
+                        if (otherRow != selectedRow) {
+                            otherRow.clearCheck()
+                        }
+                    }
+                }
             }
         }
     }

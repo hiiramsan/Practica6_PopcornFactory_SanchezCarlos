@@ -23,10 +23,19 @@ class ConfirmPurchase : AppCompatActivity() {
         val paymentGroup: RadioGroup = findViewById(R.id.paymentGroup)
         val btnConfirm: Button = findViewById(R.id.btnConfirm)
 
-        val movieName = intent.getStringExtra("movieName")
-        val seatId = intent.getIntExtra("seatId", -1)
-        val posMovie = intent.getIntExtra("posMovie", -1)
-        val clientes = intent.getSerializableExtra("clientes") as ArrayList<Cliente>
+        val bundle = intent.extras
+
+        var movieName = ""
+        var seat = -1
+        var posMovie = -1
+        var clientes = ArrayList<Cliente>()
+
+        if(bundle != null) {
+            movieName = bundle.getString("movieName").toString()
+            seat = bundle.getInt("seat")
+            posMovie = bundle.getInt("posMovie")
+            clientes = bundle.getSerializable("clientes") as ArrayList<Cliente>
+        }
 
         tvMovieTitle.text = "Movie: $movieName"
 
@@ -41,20 +50,21 @@ class ConfirmPurchase : AppCompatActivity() {
                 R.id.paymentCard -> "Card"
                 R.id.paymentCash -> "Cash"
                 else -> {
-                    Toast.makeText(this, "Payment needed", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "payment needed", Toast.LENGTH_LONG).show()
                     return@setOnClickListener
                 }
             }
 
-            val cliente = Cliente(name, paymentType, seatId)
+            val cliente = Cliente(name, paymentType, seat)
             clientes.add(cliente)
+            Toast.makeText(this, "Cliente: ${cliente.nombre}, Asiento: ${cliente.asiento}", Toast.LENGTH_LONG).show()
             val intent = Intent(this, PurchaseSummary::class.java)
 
             intent.putExtra("movieName", movieName)
             intent.putExtra("posMovie", posMovie)
             intent.putExtra("nombreCliente", cliente.nombre)
             intent.putExtra("tipoPago", cliente.tipoPago)
-            intent.putExtra("asientoId", cliente.asiento)
+            intent.putExtra("seat", cliente.asiento)
 
             this.startActivity(intent)
 
